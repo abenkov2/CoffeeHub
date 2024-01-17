@@ -1,4 +1,7 @@
+const express = require('express');
+const app = express();
 const path = require('path');
+const PORT = 3000;
 
 if (process.env.NODE_ENV === 'production') {
   // statically serve everything in the build folder on the route '/build'
