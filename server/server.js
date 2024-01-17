@@ -3,21 +3,28 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 
-if (process.env.NODE_ENV === 'production') {
-  // statically serve everything in the build folder on the route '/build'
-  app.use('/build', express.static(path.join(__dirname, '../build')));
-  // serve index.html on the route '/'
-  app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-  });
-}
+// if (process.env.NODE_ENV === 'production') {
+//   // statically serve everything in the build folder on the route '/build'
+//   app.use('/build', express.static(path.join(__dirname, '../build')));
+//   // serve index.html on the route '/'
+//   app.get('/', (req, res) => {
+//     return res
+//       .status(200)
+//       .sendFile(path.resolve(__dirname, '../client/index.html'));
+//   });
+// }
 
-app.use((req, res) =>
-  res.status(404).sendFile(path.resolve(__dirname, './client/404.html'))
-);
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.resolve(__dirname, '../client/index.html'));
+});
+
+app.use((req, res) => res.sendStatus(404));
 
 // Global error handling middleware
-// How can we trigger this to run?
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
