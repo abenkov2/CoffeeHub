@@ -21,7 +21,7 @@ const recipeSchema = new Schema({
   grind_size: { type: String, required: true },
   ratio: { type: String, required: true },
   temp: { type: String, required: true },
-  instructions: { type: String, required: true },
+  instructions: String,
 });
 
 const Recipe = mongoose.model('pourover', recipeSchema);

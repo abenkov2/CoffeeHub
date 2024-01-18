@@ -28,7 +28,9 @@ app.get('/pourovers', recipeController.getRecipes, (req, res) =>
   res.status(200).send(res.locals.recipes)
 );
 
-app.post('/pourovers', (req, res) => {});
+app.post('/pourovers', recipeController.submitRecipe, (req, res) =>
+  res.sendStatus(200)
+);
 
 app.use((req, res) => res.sendStatus(404));
 
