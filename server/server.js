@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
+
+
 app.use((req, res) => res.sendStatus(404));
 
 // Global error handling middleware
