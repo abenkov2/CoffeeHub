@@ -8,7 +8,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // sets the name of the DB that our collections are part of
-    dbName: 'pourover_recipes',
+    dbName: 'recipes',
   })
   .then(() => console.log('Connected to Mongo DB.'))
   .catch((err) => console.log(err));
@@ -24,6 +24,6 @@ const recipeSchema = new Schema({
   instructions: { type: String, required: true },
 });
 
-const Recipe = mongoose.model('recipe', recipeSchema);
+const Recipe = mongoose.model('pourover', recipeSchema);
 
 module.exports = { Recipe };

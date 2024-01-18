@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 
+const recipeController = require('./controllers/recipeController');
+
 // if (process.env.NODE_ENV === 'production') {
 //   // statically serve everything in the build folder on the route '/build'
 //   app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -22,7 +24,11 @@ app.get('/', (req, res) => {
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
+app.get('/pourovers', recipeController.getRecipes, (req, res) =>
+  res.status(200).send(res.locals.recipes)
+);
 
+app.post('/pourovers', (req, res) => {});
 
 app.use((req, res) => res.sendStatus(404));
 
