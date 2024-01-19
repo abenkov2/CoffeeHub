@@ -1,19 +1,51 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const initialState = [];
+export const fetchRecipes = createAsyncThunk('fetchRecipes', async () => {
+  const recipes = await fetch('/pourovers');
+  console.log(recipes);
+  return recipes.json()[0];
+});
+// const initialState = {
+//   recipes: [],
+// };
 
+// const recipesSlice = createSlice({
+//   name: 'recipes',
+//   initialState,
+//   reducers: {
+//     recipeAdded(state, action) {
+//       state.recipes.push(action.payload);
+//     },
+//   },
+// });
 const recipesSlice = createSlice({
   name: 'recipes',
-  initialState,
-  reducers: {
-    recipeAdded(state, action) {
-      state.push(action.payload);
-    },
+  initialState: {
+    loading: false,
+    recipes: [],
+    error: '',
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchRecipes.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(fetchRecipes.fulfilled, (state, action) => {
+      state.loading = false;
+      state.recipes.action.payload;
+      state.error = '';
+    });
+
+    builder.addCase(fetchRecipes.rejected, (state, action) => {
+      state.loading = false;
+      state.recipes = [];
+      state.error = action.error.message;
+    });
   },
 });
 
 export const selectAllRecipes = (state) => state.recipes;
 
-export const { recipeAdded } = recipesSlice.actions;
+//export const { recipeAdded } = recipesSlice.actions;
 
 export default recipesSlice.reducer;
