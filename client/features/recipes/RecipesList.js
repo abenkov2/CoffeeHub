@@ -1,16 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectAllRecipes } from './recipesSlice.js';
 import React from 'react';
 
 import Recipe from '../../../components/Recipe.jsx';
 
 const RecipesList = () => {
-  const getRecipesOnClick = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch(fetchRecipes());
-    }, []);
-  };
+  // const getRecipesOnClick = () => {
+  //   const dispatch = useDispatch();
+  //   useEffect(() => {
+  //     dispatch(fetchRecipes());
+  //   }, []);
+  // };
   const recipes = useSelector(selectAllRecipes);
   console.log(recipes.recipes);
   const renderedRecipes = recipes.recipes.map((recipe) => (
@@ -26,9 +26,6 @@ const RecipesList = () => {
   ));
   return (
     <div>
-      <button className="buttonClass" onClick={getRecipesOnClick}>
-        Get Pourover Recipes
-      </button>
       <h2>Recipes</h2>
       {renderedRecipes}
     </div>

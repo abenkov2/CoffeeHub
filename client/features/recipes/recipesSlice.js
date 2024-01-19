@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchRecipes = createAsyncThunk('fetchRecipes', async () => {
-  const recipes = await fetch('/pourovers');
-  console.log(recipes);
-  return recipes.json()[0];
+  const data = await fetch('/pourovers');
+  //console.log(data);
+  return data.json();
 });
 // const initialState = {
 //   recipes: [],

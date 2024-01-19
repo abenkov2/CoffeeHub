@@ -34,4 +34,13 @@ module.exports = {
       template: path.resolve(__dirname, './client/index.html'),
     }),
   ],
+
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'client'),
+      publicPath: './index.html',
+    },
+    compress: true,
+    port: 8080,
+  },
 };
